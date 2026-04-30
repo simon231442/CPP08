@@ -1,0 +1,4 @@
+bonjour world! This is a simple file.
+We will replace the word bonjour by bonjour.
+bonjour again: bonjour bonjour.
+End of file.

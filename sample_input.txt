@@ -1,0 +1,4 @@
+hello world! This is a simple file.
+We will replace the word hello by bonjour.
+hello again: hello hello.
+End of file.
