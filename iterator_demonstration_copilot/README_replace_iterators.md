@@ -7,23 +7,23 @@ Ce projet démontre comment utiliser les **itérateurs C++** pour lire un fichie
 
 ### 1. **Itérateurs de conteneur (`string::iterator`)**
 ```cpp
-auto it = s.begin();        // Itérateur au début de la chaîne
-auto end = s.end();         // Itérateur après le dernier caractère
-while (it != end) { ... }   // Parcourir avec itérateurs
+std::string::const_iterator it = s.begin();   // Itérateur au début de la chaîne
+std::string::const_iterator end = s.end();    // Itérateur après le dernier caractère
+while (it != end) { ... }                     // Parcourir avec itérateurs
 ```
 
 ### 2. **Itérateurs de flux (`istreambuf_iterator`)**
 Permet de lire un fichier entier en une ligne :
 ```cpp
 // Lire un fichier avec des itérateurs de flux
-ifstream in(infile, ios::binary);
-string content((istreambuf_iterator<char>(in)), istreambuf_iterator<char>());
+std::ifstream in(infile, std::ios::binary);
+std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
 ```
 
 ### 3. **Fonction `std::search()` avec itérateurs**
 Cherche une séquence dans un intervalle d'itérateurs :
 ```cpp
-auto found = search(it, s.end(), from.begin(), from.end());
+std::string::const_iterator found = std::search(it, s.end(), from.begin(), from.end());
 if (found == s.end()) {
     // Pas trouvé
 } else {
@@ -34,13 +34,13 @@ if (found == s.end()) {
 ## Fonction principale: `replace_all_using_iterators()`
 
 ```cpp
-string replace_all_using_iterators(const string& s, const string& from, const string& to) {
-    string result;
-    auto it = s.begin();                          // Début de chaîne
+std::string replace_all_using_iterators(const std::string& s, const std::string& from, const std::string& to) {
+    std::string result;
+    std::string::const_iterator it = s.begin();   // Début de chaîne
     
     while (it != s.end()) {
         // Chercher le mot à partir de 'it'
-        auto found = search(it, s.end(), from.begin(), from.end());
+        std::string::const_iterator found = std::search(it, s.end(), from.begin(), from.end());
         
         if (found == s.end()) {
             // Pas de match: ajouter le reste du texte
@@ -72,7 +72,7 @@ string replace_all_using_iterators(const string& s, const string& from, const st
 
 ```bash
 # Compilation
-g++ -std=c++11 -Wall -o replace_iterators replace_iterators.cpp
+g++ -std=c++98 -Wall -Wextra -o replace_iterators replace_iterators.cpp
 
 # Exécution
 ./replace_iterators sample_input.txt output.txt "hello" "bonjour"
