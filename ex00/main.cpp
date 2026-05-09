@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <vector>
 #include <list>
+#include <iterator>
 
 static void	titlePut(std::string const title)
 {
@@ -14,8 +15,12 @@ int	main(void)
 {
 	int	arr[] = {42, 64, 66, 92, 30, 23};
 
-	titlePut("test 1: vec as container, search success");
+	titlePut("vector generating");
+	std::copy(arr, arr + sizeof(arr) / sizeof(int), std::ostream_iterator<int>(std::cout, " "));
 	std::vector<int> vec(arr, arr + sizeof(arr) / sizeof(int));
+	std::cout << std::endl;
+
+	titlePut("test 1: vec as container, search success");
 	int i = 42;
 	try
 	{
@@ -44,7 +49,7 @@ int	main(void)
 	i = 30;
 	try
 	{
-		easyfind(vec, i);
+		easyfind(list, i);
 		std::cout << i << ", integer found" << std::endl; 
 	}
 	catch (std::exception & e)
