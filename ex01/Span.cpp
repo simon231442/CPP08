@@ -23,17 +23,17 @@ Span&		Span::operator=(Span const & rhs)
 
 void		Span::addNumber(int const & number)
 {
-	if (this->numbers.size() >= this->sizeMax_)
-		throw (alreadyFullException);
-	this->numbers.push_back(number);
+	if (this->numbers_.size() >= this->sizeMax_)
+		throw alreadyFullException();
+	this->numbers_.push_back(number);
 }
 
-unsigned int	Span::shortestSpan(void)
+unsigned int	Span::shortestSpan(void) const
 {
 	if (this->numbers_.size() < 2)
-		throw (notEnoughNumbersException);
+		throw notEnoughNumbersException();
 	std::vector<int>	numbersCopy(this->numbers_);
-	std::sort(numbersCopy);
+	std::sort(numbersCopy.begin(), numbersCopy.end());
 	std::vector<int>::iterator	it(numbersCopy.begin());
 	int 				spanCurrent;
 	int					spanShortest;
@@ -41,13 +41,21 @@ unsigned int	Span::shortestSpan(void)
 	spanShortest = *(++it) - spanShortest;
 	while (1)
 	{
-		SpanCurrent = *it;
+		spanCurrent = *it;
 		if (++it == numbersCopy.end())
 			return spanShortest;
-		SpanCurrent = *it - SpanCurrent;
+		spanCurrent = *it - spanCurrent;
 		if (spanCurrent < spanShortest)
 			spanShortest = spanCurrent;
 	}
+}
+
+unsigned int	Span::longestSpan(void) const
+{	if (this->numbers_.size() < 2)
+		throw notEnoughNumbersException();
+	std::vector<int>	numbersCopy(this->numbers_);
+	std::sort(numbersCopy.begin(), numbersCopy.end());
+	return (*numbersCopy.end(), *numbersCopy.begin());
 }
 
 
