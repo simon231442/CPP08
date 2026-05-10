@@ -51,11 +51,20 @@ unsigned int	Span::shortestSpan(void) const
 }
 
 unsigned int	Span::longestSpan(void) const
-{	if (this->numbers_.size() < 2)
+{
+	if (this->numbers_.size() < 2)
 		throw notEnoughNumbersException();
 	std::vector<int>	numbersCopy(this->numbers_);
 	std::sort(numbersCopy.begin(), numbersCopy.end());
-	return (*numbersCopy.end(), *numbersCopy.begin());
+	return static_cast<unsigned int>(numbersCopy.back() - numbersCopy.front());
 }
 
+const char*		Span::alreadyFullException::what() const throw()
+{
+	return "vector is already full";
+}
 
+const char*		Span::notEnoughNumbersException::what() const throw()
+{
+	return "there isn't enough numbers";
+}
