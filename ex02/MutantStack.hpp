@@ -1,5 +1,7 @@
 #pragma once
 
+# include <stack>
+
 template <typename T>
 class MutantStack : public std::stack<T>
 {
@@ -17,13 +19,16 @@ class MutantStack : public std::stack<T>
 };
 
 template <typename T>
-MutantStack::MutantStack() : std::stack<T>() {}
+MutantStack<T>::MutantStack() : std::stack<T>() {}
 
 template <typename T>
-MutantStack::MutantStack(MutantStack const & src) : stack<T>(src) {}
+MutantStack<T>::MutantStack(MutantStack const & src) : std::stack<T>(src) {}
 
 template <typename T>
-MutantStack&			MutantStack::operator=(MutantStack const & rhs);
+MutantStack<T>::~MutantStack() {}
+
+template <typename T>
+MutantStack<T>&			MutantStack<T>::operator=(MutantStack const & rhs)
 {
 	if (this != &rhs)
 		std::stack<T>::operator=(rhs);
@@ -31,15 +36,15 @@ MutantStack&			MutantStack::operator=(MutantStack const & rhs);
 }
 
 template <typename T>
-MutantStack::iterator	MutantStack::begin(void)
+typename MutantStack<T>::iterator	MutantStack<T>::begin(void)
 {
-	return (c.begin());
+	return this->c.begin();
 }
 
 template <typename T>
-MutantStack::iterator	MutantStack::end(void)
+typename MutantStack<T>::iterator	MutantStack<T>::end(void)
 {
-	return (c.end());
+	return this->c.end();
 }
 
 
