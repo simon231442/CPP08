@@ -21,7 +21,7 @@ int	main(void)
 
 	for (int i = 0; i < 8; i++)
 	{
-		newNumber = std::rand();
+		newNumber = std::rand() % 60;
 		std::cout << newNumber << " ";
 		span.addNumber(newNumber);
 	}
@@ -57,7 +57,7 @@ int	main(void)
 	titlePut("test 5: addNumbers with list which contain 10 000 int (success)");
 	std::list<int>	bigList;
 	for (int i = 0; i < 10000; i++)
-		bigList.push_back(std::rand());
+		bigList.push_back(std::rand() % 100);
 
 	Span			bigSpan(10000);
 	bigSpan.addNumbers(bigList.begin(),bigList.end());
