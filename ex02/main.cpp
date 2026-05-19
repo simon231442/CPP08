@@ -1,5 +1,6 @@
 #include "MutantStack.hpp"
 #include <iostream>
+#include <iomanip>
 #include <list>
 
 static void	titlePut(std::string const title)
@@ -70,27 +71,27 @@ int	main(void)
 		mstack_orig.push(21);
 		mstack_orig.push(84);
 
-		std::cout << "Original stack size: " << mstack_orig.size() << std::endl;
+		std::cout << std::setw(50) << std::left << "Original stack size:" << mstack_orig.size() << std::endl;
 
 		// Test de construction par copie
 		MutantStack<int> mstack_copy(mstack_orig);
-		std::cout << "Copy stack size (after copy constructor): " << mstack_copy.size() << std::endl;
+		std::cout << std::setw(50) << std::left << "Copy stack size (after copy constructor):" << mstack_copy.size() << std::endl;
 
 		// Test d'assignation
 		MutantStack<int> mstack_assign;
 		mstack_assign.push(1); // On met un element bidon
 		mstack_assign = mstack_orig;
-		std::cout << "Assign stack size (after operator=): " << mstack_assign.size() << std::endl;
+		std::cout << std::setw(50) << std::left << "Assign stack size (after operator=):" << mstack_assign.size() << std::endl;
 
 		// Modification de l'original pour prouver la copie profonde
 		mstack_orig.pop();
-		std::cout << "--- Apres mstack_orig.pop() ---" << std::endl;
-		std::cout << "Original stack size: " << mstack_orig.size() << std::endl;
-		std::cout << "Copy stack size: " << mstack_copy.size() << std::endl;
-		std::cout << "Assign stack size: " << mstack_assign.size() << std::endl;
-		
-		std::cout << "Copy top: " << mstack_copy.top() << std::endl;
-		std::cout << "Assign top: " << mstack_assign.top() << std::endl;
+		mstack_copy.push(1);
+		mstack_assign.push(3);
+		mstack_assign.push(42);
+		std::cout << "\n--- Apres mstack_orig.pop() ---" << std::endl;
+		std::cout << std::setw(50) << std::left << "Original stack size:" << mstack_orig.size() << std::endl;
+		std::cout << std::setw(50) << std::left << "Copy stack size:" << mstack_copy.size() << std::endl;
+		std::cout << std::setw(50) << std::left << "Assign stack size:" << mstack_assign.size() << std::endl;
 	}
 
 	return 0;
